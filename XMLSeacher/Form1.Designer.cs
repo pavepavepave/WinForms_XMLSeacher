@@ -54,6 +54,7 @@
             this.SearchPath.Name = "SearchPath";
             this.SearchPath.Size = new System.Drawing.Size(490, 20);
             this.SearchPath.TabIndex = 1;
+            this.SearchPath.TextChanged += new System.EventHandler(this.SearchPath_TextChanged);
             // 
             // label1
             // 
@@ -95,6 +96,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(15, 85);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.richTextBox1.Size = new System.Drawing.Size(657, 270);
             this.richTextBox1.TabIndex = 7;

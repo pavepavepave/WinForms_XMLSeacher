@@ -1,40 +1,40 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
+using System.Windows.Forms;
 
 namespace XMLSeacher
 {
     public class Search
     {
         private string path;
-        private string _searchKey;
+        private string _search_key;
         public string Path { get => path; set => path = value; }
-        public string SearchKey { get => _searchKey; set => _searchKey = value; }
+        public string SearchKey { get => _search_key; set => _search_key = value; }
         public Search(string path, string searchKey)
         {
             Path = path;
             SearchKey = searchKey;
         }
-        public void StartSearch()
+        public void StartSearch(Logs logger, ref RichTextBox richTextBox)
         {
-            Logs.ClearText();
+            logger.ClearText();
 
             int count = 0;
             var fw = Directory.GetFiles(Path, "*.xml");
             
             foreach (var file in fw)
             {
-                var fileInfo = new FileInfo(file);
+                var fileName = new FileInfo(file);
                 var openFiles = File.ReadAllText(file);
                 if (openFiles.Contains(SearchKey))
                 {
                     count++; 
-                    Logs.WriteText(fileInfo.Name);
-                    Program.forms.AddToRichBox(fileInfo.Name);
+                    logger.WriteText(fileName.Name);
+                    richTextBox.Text += $"{fileName.Name} \n";
                 }
             }
-           
-            Program.forms.AddToRichBox(count == 0 ? $"Совпадений не найдено" : $"Найдено {count} совпадений(-ая).");
+
+            richTextBox.Text += (count == 0 ? $"Совпадений не найдено" : $"Найдено {count} совпадений(-ая).");
         }
     }
 }

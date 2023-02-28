@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 
 namespace XMLSeacher
 {
@@ -30,28 +21,59 @@ namespace XMLSeacher
             }
         }
 
+        bool CheckString(string str)
+        {
+            try
+            {
+                if (str == string.Empty)
+                    MessageBox.Show("Значение не может быть пустым." + "", "Error", MessageBoxButtons.OK);
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("Значение не может быть пустым.", "Error", MessageBoxButtons.OK);
+                return false;
+            }
+
+            return true;
+        }
         private void Btn_Search_Click(object sender, EventArgs e)
         {
-            Logs.RememberLastPath(SearchPath.Text);
-            if (SearchPath.Text == string.Empty || SelectedKey.Text == string.Empty)
-            {
-                    MessageBox.Show("Не указан путь или ключ поиска!", "Error", MessageBoxButtons.OK);
-            }
-            if (SearchPath.Text != string.Empty && SelectedKey.Text != string.Empty)
+            if (!CheckString(SearchPath.Text) || !CheckString(SelectedKey.Text))
+                return;
+
+            Logs p = new Logs("logs.txt");
+
+            try
             {
                 Search searcher = new Search(SearchPath.Text, SelectedKey.Text);
                 richTextBox1.Clear();
-                searcher.StartSearch();
+                searcher.StartSearch(p, ref richTextBox1);
             }
-        }
-        public void AddToRichBox(string value)
-        {
-            richTextBox1.Text += value + "\n";
+            catch (DirectoryNotFoundException)
+            {
+                MessageBox.Show("Указанного пути не существует", "Error", MessageBoxButtons.OK);
+            }
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SearchPath.Text = Logs.GetLastPath();
+            if (!File.Exists("mycfg.cfg"))
+                File.AppendAllText("mycfg.cfg", "Укажите папку поиска");
+            PathConfig configRead = new PathConfig("mycfg.cfg");
+            configRead.Load();
+            SearchPath.Text = configRead.Path;
+        }
+
+        private void SearchPath_TextChanged(object sender, EventArgs e)
+        {
+            PathConfig configWrite = new PathConfig("mycfg.cfg");
+
+            if (!CheckString(SearchPath.Text) && SearchPath.Text.Length < 3 || SearchPath.Text == configWrite.Path)
+                return;
+
+            configWrite.Path = SearchPath.Text;
+            configWrite.Save();
         }
     }
 }

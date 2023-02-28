@@ -8,13 +8,13 @@ namespace XMLSeacher
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
-        public static Form1 forms = new Form1();
 
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.Run(forms);
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
         }
     }
 }
