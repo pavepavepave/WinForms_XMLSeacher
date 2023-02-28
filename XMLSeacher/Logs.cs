@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 public static class Logs
 {
     private static string _fileWrites = "";
-    private static readonly string _logFilesName = $"logs.txt";
-    private static string _lastPath { get; set; }
+    private static readonly string _logFilesName = "logs.txt";
+    private static readonly string _lastPathFile = "path.txt";
     public static void WriteText(string message)
     {
         _fileWrites += message + "\n";
@@ -25,12 +22,21 @@ public static class Logs
             sw.WriteLine("");
         }
     }
-    public static void RememberLastPath()
+    public static void RememberLastPath(string path)
     {
-
+        if (File.Exists(_lastPathFile))
+        {
+            File.Delete(_lastPathFile);
+        }
+        File.AppendAllText(_lastPathFile, path);
     }
-    public static void GetLastPath()
+    public static string GetLastPath()
     {
+        if (!File.Exists(_lastPathFile) || File.ReadAllLines(_lastPathFile).Length == 0)
+        {
+            File.AppendAllText(_lastPathFile, "0");
+        }
+        return File.ReadAllLines(_lastPathFile)[0];
 
     }
 }

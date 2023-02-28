@@ -89,7 +89,7 @@
             this.btn_search.TabIndex = 6;
             this.btn_search.Text = "Искать";
             this.btn_search.UseVisualStyleBackColor = true;
-            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            this.btn_search.Click += new System.EventHandler(this.Btn_Search_Click);
             // 
             // richTextBox1
             // 
@@ -117,6 +117,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "XML key searcher";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

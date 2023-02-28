@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace XMLSeacher
 {
@@ -13,16 +12,16 @@ namespace XMLSeacher
         public string SearchKey { get => _searchKey; set => _searchKey = value; }
         public Search(string path, string searchKey)
         {
-            this.Path = path;
-            this.SearchKey = searchKey;
-
+            Path = path;
+            SearchKey = searchKey;
         }
-
         public void StartSearch()
         {
             Logs.ClearText();
+
             int count = 0;
             var fw = Directory.GetFiles(Path, "*.xml");
+            
             foreach (var file in fw)
             {
                 var fileInfo = new FileInfo(file);
@@ -34,15 +33,8 @@ namespace XMLSeacher
                     Program.forms.AddToRichBox(fileInfo.Name);
                 }
             }
-
-            if (count == 0)
-            {
-                Program.forms.AddToRichBox($"Совпадений не найдено");
-            }
-            else
-            {
-                Program.forms.AddToRichBox($"Найдено {count} совпадений(-ая).");
-            }
+           
+            Program.forms.AddToRichBox(count == 0 ? $"Совпадений не найдено" : $"Найдено {count} совпадений(-ая).");
         }
     }
 }

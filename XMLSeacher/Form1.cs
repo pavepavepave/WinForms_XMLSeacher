@@ -30,13 +30,14 @@ namespace XMLSeacher
             }
         }
 
-        private void btn_search_Click(object sender, EventArgs e)
+        private void Btn_Search_Click(object sender, EventArgs e)
         {
+            Logs.RememberLastPath(SearchPath.Text);
             if (SearchPath.Text == string.Empty || SelectedKey.Text == string.Empty)
             {
                     MessageBox.Show("Не указан путь или ключ поиска!", "Error", MessageBoxButtons.OK);
             }
-            if (SelectedKey.Text != string.Empty && SearchPath.Text != string.Empty)
+            if (SearchPath.Text != string.Empty && SelectedKey.Text != string.Empty)
             {
                 Search searcher = new Search(SearchPath.Text, SelectedKey.Text);
                 richTextBox1.Clear();
@@ -46,6 +47,11 @@ namespace XMLSeacher
         public void AddToRichBox(string value)
         {
             richTextBox1.Text += value + "\n";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            SearchPath.Text = Logs.GetLastPath();
         }
     }
 }
