@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using XMLSeacher;
 
 namespace XMLSeacher
 {
@@ -21,21 +17,31 @@ namespace XMLSeacher
             this.SearchKey = searchKey;
 
         }
+
         public void StartSearch()
         {
+            Logs.ClearText();
             int count = 0;
-            Console.WriteLine("\n" + "Ваш результат: " + "\n");
             var fw = Directory.GetFiles(Path, "*.xml");
             foreach (var file in fw)
             {
                 var fileInfo = new FileInfo(file);
                 var openFiles = File.ReadAllText(file);
-                if (openFiles.Contains(_searchKey))
+                if (openFiles.Contains(SearchKey))
                 {
-
+                    count++; 
                     Logs.WriteText(fileInfo.Name);
-                    count++;
+                    Program.forms.AddToRichBox(fileInfo.Name);
                 }
+            }
+
+            if (count == 0)
+            {
+                Program.forms.AddToRichBox($"Совпадений не найдено");
+            }
+            else
+            {
+                Program.forms.AddToRichBox($"Найдено {count} совпадений(-ая).");
             }
         }
     }

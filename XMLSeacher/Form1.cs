@@ -21,8 +21,7 @@ namespace XMLSeacher
 
         }
 
-
-        public void ChooseFolder_Click(object sender, EventArgs e)
+        private void ChooseFolder_Click(object sender, EventArgs e)
         {
             using (var folder = new FolderBrowserDialog())
             {
@@ -35,14 +34,18 @@ namespace XMLSeacher
         {
             if (SearchPath.Text == string.Empty || SelectedKey.Text == string.Empty)
             {
-                    MessageBox.Show("Заполните путь или ключ поиска!", "Error", MessageBoxButtons.OK);
+                    MessageBox.Show("Не указан путь или ключ поиска!", "Error", MessageBoxButtons.OK);
             }
             if (SelectedKey.Text != string.Empty && SearchPath.Text != string.Empty)
             {
                 Search searcher = new Search(SearchPath.Text, SelectedKey.Text);
+                richTextBox1.Clear();
                 searcher.StartSearch();
             }
         }
-
+        public void AddToRichBox(string value)
+        {
+            richTextBox1.Text += value + "\n";
+        }
     }
 }

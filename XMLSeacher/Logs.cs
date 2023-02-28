@@ -7,15 +7,31 @@ using System.Threading.Tasks;
 
 public static class Logs
 {
-    private static string fileWrites = "";
-
+    private static string _fileWrites = "";
+    private static readonly string _logFilesName = $"logs.txt";
+    private static string _lastPath { get; set; }
     public static void WriteText(string message)
     {
-        fileWrites += message + "\n";
-        using (var sw = new StreamWriter($"logs.txt", false, Encoding.UTF8))
+        _fileWrites += message + "\n";
+        using (var sw = new StreamWriter(_logFilesName, false, Encoding.UTF8))
         {
-            sw.WriteLine(fileWrites);
+            sw.WriteLine(_fileWrites);
         }
+    }
+    public static void ClearText()
+    {
+        using (var sw = new StreamWriter(_logFilesName, false, Encoding.UTF8))
+        {
+            sw.WriteLine("");
+        }
+    }
+    public static void RememberLastPath()
+    {
+
+    }
+    public static void GetLastPath()
+    {
+
     }
 }
 

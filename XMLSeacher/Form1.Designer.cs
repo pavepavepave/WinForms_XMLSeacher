@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.ChooseFolder = new System.Windows.Forms.Button();
             this.SearchPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SelectedKey = new System.Windows.Forms.TextBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btn_search = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // ChooseFolder
             // 
-            this.ChooseFolder.Location = new System.Drawing.Point(710, 12);
+            this.ChooseFolder.Location = new System.Drawing.Point(597, 12);
             this.ChooseFolder.Name = "ChooseFolder";
             this.ChooseFolder.Size = new System.Drawing.Size(75, 23);
             this.ChooseFolder.TabIndex = 0;
@@ -52,9 +52,8 @@
             // 
             this.SearchPath.Location = new System.Drawing.Point(101, 14);
             this.SearchPath.Name = "SearchPath";
-            this.SearchPath.Size = new System.Drawing.Size(603, 20);
+            this.SearchPath.Size = new System.Drawing.Size(490, 20);
             this.SearchPath.TabIndex = 1;
-            this.SearchPath.Text = "M:\\Games\\UniplayPW151\\element\\interfaces.pck.files\\interfaces";
             // 
             // label1
             // 
@@ -78,22 +77,15 @@
             // 
             this.SelectedKey.Location = new System.Drawing.Point(101, 48);
             this.SelectedKey.Name = "SelectedKey";
-            this.SelectedKey.Size = new System.Drawing.Size(603, 20);
+            this.SelectedKey.Size = new System.Drawing.Size(490, 20);
             this.SelectedKey.TabIndex = 4;
-            this.SelectedKey.Text = "Write word key in xml for search";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 410);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(773, 28);
-            this.progressBar1.TabIndex = 5;
+            this.SelectedKey.Text = "searchKey";
             // 
             // btn_search
             // 
             this.btn_search.Location = new System.Drawing.Point(12, 361);
             this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(773, 43);
+            this.btn_search.Size = new System.Drawing.Size(660, 43);
             this.btn_search.TabIndex = 6;
             this.btn_search.Text = "Искать";
             this.btn_search.UseVisualStyleBackColor = true;
@@ -104,7 +96,7 @@
             this.richTextBox1.Location = new System.Drawing.Point(15, 85);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox1.Size = new System.Drawing.Size(770, 270);
+            this.richTextBox1.Size = new System.Drawing.Size(657, 270);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
@@ -113,18 +105,18 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(797, 450);
+            this.ClientSize = new System.Drawing.Size(684, 411);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btn_search);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.SelectedKey);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SearchPath);
             this.Controls.Add(this.ChooseFolder);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "XML key searcher";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,7 +129,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox SelectedKey;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
